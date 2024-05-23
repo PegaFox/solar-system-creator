@@ -10,7 +10,7 @@ class Body {
 
     float shatterThreshold = 2.0f;
 
-    glm::vec3 color = glm::vec3(0.0f);
+    glm::vec3 color = glm::vec3(1.0f, 0.0f, 1.0f);
 
     bool active = true;
 

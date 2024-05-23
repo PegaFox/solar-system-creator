@@ -10,7 +10,7 @@ class Lookahead {
     };
 
     void update(sf::RenderTarget& SCREEN, float fps) {
-      adjustPrecision(fps);
+      //adjustPrecision(fps);
       setup();
 
       for (uint32_t i = 0; i < iterations; i++) {
