@@ -1,7 +1,7 @@
 
 # Solar System Creator
 
-### A simple n body simulator
+A simple n body simulator
 
 ## Installation
 
