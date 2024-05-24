@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <random>
-#include <pegafox/utils.hpp>
-#include <pegafox/menu_utils.hpp>
+#include "utils.hpp"
+#include "menu_utils.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
 std::default_random_engine randomGenerator(time(nullptr));
