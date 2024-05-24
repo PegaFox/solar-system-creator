@@ -345,7 +345,7 @@ class GUI {
     pf::Button loadBtn = pf::Button(&load);
 
     void saveSystem() {
-      std::ofstream saveFile("save");
+      std::ofstream saveFile("save.txt");
 
       saveFile << BIG_G << "\n\n";
 
@@ -365,7 +365,7 @@ class GUI {
     }
 
     void loadSystem() {
-      std::ifstream saveFile("save");
+      std::ifstream saveFile("save.txt");
 
       double savedBigG;
       saveFile >> savedBigG;

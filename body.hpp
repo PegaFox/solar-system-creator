@@ -51,7 +51,8 @@ class Body {
             body.active = false;
           } else {
             body.active = false;
-            pos = (pos*mass+body.pos*body.mass) / (mass+body.mass);
+            pos = (pos*mass + body.pos*body.mass) / (mass+body.mass);
+            vel = (vel*mass + body.vel*body.mass) / (mass+body.mass); 
             radius += body.radius;
             mass += body.mass;
           }

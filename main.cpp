@@ -142,7 +142,7 @@ int main() {
     }
     SCREEN.setView(cam);
 
-    SCREEN.setTitle(std::to_string(fpsClock.get_fps())+", "+std::to_string(speed)+", "+std::to_string(lookahead.precision));
+    SCREEN.setTitle(std::to_string(fpsClock.get_fps())+", "+std::to_string(speed));
 
     if (!paused) {
       for (uint32_t i = 0; i < speed; i++) {
