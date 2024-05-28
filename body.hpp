@@ -56,16 +56,17 @@ class Body {
             radius += body.radius;
             mass += body.mass;
           }
+        } else
+        {
+          glm::dvec3 dir = glm::normalize(body.pos - pos);
+
+          double gravityPower = BIG_G * ((body.mass*mass)/(dis*dis));
+          glm::dvec3 force = dir * gravityPower;
+
+	        force *= glm::pow(mass, -1.0f);
+
+          vel += force * precision;
         }
-
-        glm::dvec3 dir = glm::normalize(body.pos - pos);
-
-        double gravityPower = BIG_G * ((body.mass*mass)/(dis*dis));
-        glm::dvec3 force = dir * gravityPower;
-
-	      force *= glm::pow(mass, -1.0f);
-
-        vel += force * precision;
       }
     }
 

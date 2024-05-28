@@ -5,6 +5,22 @@ A simple n body simulator
 
 ## Installation
 
+```
+
+git clone --recursive https://github.com/PegaFox/solar-system-creator
+
+cd solar-system-creator
+
+mkdir build
+
+cd build
+
+cmake ..
+
+make
+
+```
+
 ## User Interface
 
 Mouse Scroll: Zoom
