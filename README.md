@@ -21,6 +21,8 @@ make
 
 ```
 
+After installation, the folder can be moved to a custom location without causing problems
+
 ## User Interface
 
 Mouse Scroll: Zoom
