@@ -52,7 +52,7 @@ int main() {
     {
       sf::Event event;
       while (SCREEN.pollEvent(event)) {
-        gui.getEvent(event);
+        gui.getEvent(event, SCREEN);
         switch (event.type) {
           case sf::Event::Closed:
             SCREEN.close();
@@ -62,10 +62,6 @@ int main() {
             break;
           case sf::Event::GainedFocus:
             focus = true;
-            break;
-          case sf::Event::MouseButtonPressed:
-            if (!focus) break;
-            gui.mouse = event.mouseButton.button;
             break;
           case sf::Event::MouseWheelScrolled:
             if (!focus) break;

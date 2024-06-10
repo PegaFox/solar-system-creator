@@ -5,8 +5,6 @@ class GUI {
     uint32_t selectedBody = -1U;
     uint32_t following = -1;
 
-    sf::Mouse::Button mouse = sf::Mouse::ButtonCount;
-
     GUI() {
       up.loadFromFile("../increase.png");
       upIcon.setTexture(up);
@@ -48,14 +46,60 @@ class GUI {
       loadBtn.setSize(sf::Vector2f(60.0f, 16.0f));
     }
 
-    void getEvent(const sf::Event& event)
+    void getEvent(const sf::Event& event, const sf::RenderWindow& SCREEN)
     {
+      if (event.type == sf::Event::MouseButtonPressed)
+      {
+        glm::vec2 mousePos = pf::vector2fToVec2(SCREEN.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y)));
+        switch (event.mouseButton.button)
+        {
+          case sf::Mouse::Left:
+            if (follow) {
+              if (following == selectedBody) {
+                following = -1;
+              } else {
+                following = selectedBody;
+              }
+            }
+
+            if (save) {
+              saveSystem();
+            }
+            if (load) {
+              loadSystem();
+            }
+
+            for (uint32_t b = 0; b < bodies.size(); b++) {
+              if (glm::distance(mousePos, glm::vec2(bodies[b].pos.x, bodies[b].pos.z)) <= bodies[b].radius) {
+                held = b;
+              }
+            }
+            break;
+
+          case sf::Mouse::Middle:
+            selectedBody = -1;
+            for (uint32_t b = 0; b < bodies.size(); b++) {
+              if (glm::distance(mousePos, glm::vec2(bodies[b].pos.x, bodies[b].pos.z)) <= bodies[b].radius) {
+                selectedBody = b;
+              }
+            }
+          break;
+
+          case sf::Mouse::Right:
+            bodies.push_back(Body());
+            bodies.back().pos.x = mousePos.x;
+            bodies.back().pos.z = mousePos.y;
+            bodies.back().color = glm::vec3((float)randomGenerator()/randomGenerator.max(), (float)randomGenerator()/randomGenerator.max(), (float)randomGenerator()/randomGenerator.max());
+            bodies.back().mass = 1;
+            bodies.back().radius = 1;
+            break;
+        }
+      }
+
       angSlider.getEvent(event);
     }
 
     void update(sf::RenderWindow& SCREEN) {
-      sf::Vector2f m = SCREEN.mapPixelToCoords(sf::Mouse::getPosition(SCREEN), cam);
-      glm::vec2 mPos(m.x, m.y);
 
       if (paused) {
         text.setString("LOOKAHEAD");
@@ -220,50 +264,6 @@ class GUI {
           lookahead = 0U;
         }
 
-        if (mouse == sf::Mouse::Left) {
-          mouse = sf::Mouse::ButtonCount;
-
-          if (follow) {
-            if (following == selectedBody) {
-              following = -1;
-            } else {
-              following = selectedBody;
-            }
-          }
-
-          if (save) {
-            saveSystem();
-          }
-          if (load) {
-            loadSystem();
-          }
-
-          for (uint32_t b = 0; b < bodies.size(); b++) {
-            if (glm::distance(mPos, glm::vec2(bodies[b].pos.x, bodies[b].pos.z)) <= bodies[b].radius) {
-              held = b;
-            }
-          }
-        }
-        if (mouse == sf::Mouse::Middle) {
-          mouse = sf::Mouse::ButtonCount;
-
-          selectedBody = -1;
-          for (uint32_t b = 0; b < bodies.size(); b++) {
-            if (glm::distance(mPos, glm::vec2(bodies[b].pos.x, bodies[b].pos.z)) <= bodies[b].radius) {
-              selectedBody = b;
-            }
-          }
-        }
-        if (mouse == sf::Mouse::Right) {
-          mouse = sf::Mouse::ButtonCount;
-
-          bodies.push_back(Body());
-          bodies.back().pos.x = mPos.x;
-          bodies.back().pos.z = mPos.y;
-          bodies.back().color = glm::vec3((float)randomGenerator()/randomGenerator.max(), (float)randomGenerator()/randomGenerator.max(), (float)randomGenerator()/randomGenerator.max());
-          bodies.back().mass = 1;
-          bodies.back().radius = 1;
-        }
         if (selectedBody != -1) {
           if (focus && sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace)) {
             bodies.erase(bodies.begin()+selectedBody);
