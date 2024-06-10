@@ -52,7 +52,7 @@ int main() {
     {
       sf::Event event;
       while (SCREEN.pollEvent(event)) {
-        gui.getEvent(event, SCREEN);
+        gui.getEvent(event, SCREEN, cam);
         switch (event.type) {
           case sf::Event::Closed:
             SCREEN.close();

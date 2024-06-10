@@ -46,11 +46,11 @@ class GUI {
       loadBtn.setSize(sf::Vector2f(60.0f, 16.0f));
     }
 
-    void getEvent(const sf::Event& event, const sf::RenderWindow& SCREEN)
+    void getEvent(const sf::Event& event, const sf::RenderWindow& SCREEN, const sf::View& cam)
     {
       if (event.type == sf::Event::MouseButtonPressed)
       {
-        glm::vec2 mousePos = pf::vector2fToVec2(SCREEN.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y)));
+        glm::vec2 mousePos = pf::vector2fToVec2(SCREEN.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y), cam));
         switch (event.mouseButton.button)
         {
           case sf::Mouse::Left:
