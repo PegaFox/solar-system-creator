@@ -474,7 +474,7 @@ namespace pf {
 
     private:
 
-      uint scroll = 0;
+      uint16_t scroll = 0;
 
       bool selected = false;
 
