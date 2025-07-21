@@ -1,9 +1,9 @@
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <random>
-
-#define _USE_MATH_DEFINES
 #include "utils.hpp"
 #include "menu_utils.hpp"
 #include <glm/gtc/matrix_transform.hpp>
