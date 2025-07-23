@@ -74,7 +74,8 @@ jobs:
           libegl1-mesa-dev \
           libdrm-dev \
           libgbm-dev \
-          libopenal-dev
+          libopenal-dev \
+          libfreetype-dev
         fi
       shell: bash
       
