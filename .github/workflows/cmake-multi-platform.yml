@@ -61,7 +61,20 @@ jobs:
       run: git submodule update --init --recursive
 
     - name: Install prerequisites
-      run: sudo apt-get install -y libx11-dev
+      run: |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          sudo apt update && sudo apt install \
+          libxrandr-dev \
+          libxcursor-dev \
+          libxi-dev \
+          libudev-dev \
+          libflac-dev \
+          libvorbis-dev \
+          libgl1-mesa-dev \
+          libegl1-mesa-dev \
+          libdrm-dev \
+          libgbm-dev
+        fi
       
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
